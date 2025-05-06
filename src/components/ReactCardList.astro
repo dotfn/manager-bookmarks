@@ -1,0 +1,19 @@
+---
+---
+
+<div id="react-card-container"></div>
+
+<script>
+  import React from 'react';
+  import ReactDOM from 'react-dom/client';
+  import CardList from '../components/CardComponent.jsx';
+
+  // Esperar a que el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('react-card-container');
+    if (container) {
+      const root = ReactDOM.createRoot(container);
+      root.render(React.createElement(CardList));
+    }
+  });
+</script>

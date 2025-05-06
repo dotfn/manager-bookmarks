@@ -1,0 +1,48 @@
+<section class="p-4 max-w-md mx-auto bg-white rounded-lg shadow-md">
+  <form id="urlForm" class="space-y-4">
+    <div>
+      <label for="urlInput" class="block mb-2 text-sm font-medium text-gray-900">
+        Ingresá una URL
+      </label>
+      <input
+        type="url"
+        id="urlInput"
+        name="url"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+        placeholder="https://ejemplo.com"
+        required
+      >
+    </div>
+    <button
+      type="submit"
+      id="previewButton"
+      class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      Agregar enlace
+    </button>
+  </form>
+</section>
+
+<script type="module">
+  import LinkPreviewService from '../utils/LinkPreviewServices.js';
+
+  const form = document.getElementById('urlForm');
+  const input = document.getElementById('urlInput');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const url = input.value.trim();
+    if (!url) return;
+
+    try {
+      const item = await LinkPreviewService.fetchAndStore(url);
+    //   alert(`Guardado: ${item.title}`);
+      form.reset();
+      // Acá podrías emitir un evento personalizado para renderizar el nuevo card Ej: 
+	  document.dispatchEvent(new CustomEvent('linkAdded', { detail: item }));
+    } catch (err) {
+    //   alert('No se pudo guardar el enlace. Revisá la consola.');
+      console.error(err);
+    }
+  });
+</script>
