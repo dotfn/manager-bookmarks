@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AddLink from '../components/AddLink.astro';
-import ReactCardList from '../components/ReactCardList.astro';
+import AddLink from '../components/AddLink';
+import CardList from '../components/CardList';
 ---
 
 <Layout>
 	<div class="max-w-2xl mx-auto px-4 py-8">
-		<h1 class="text-2xl font-bold text-center text-white mb-6">Guardador de Enlaces - React</h1>
-		<AddLink />
-		<ReactCardList />
+		<h1 class="text-2xl font-bold text-center text-white mb-6">Manager Bookmarks</h1>
+		<AddLink client:load />
+		<CardList client:load/>
 	</div>
 </Layout>
